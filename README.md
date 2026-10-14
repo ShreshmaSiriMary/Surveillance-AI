@@ -57,6 +57,25 @@ Vite proxies `/api` to `http://127.0.0.1:4000` in development. Override this wit
 
 The root `.gitignore` excludes `.env` and `.env.*`; `.env.example` is safe to commit. Do not commit Atlas credentials, Cloudinary/Twilio secrets, or production JWT keys.
 
+## Preview all three roles locally
+
+The sign-in page has Admin, Officer, and Citizen tabs. The selected tab only requests a role match; the API verifies the password and stored role, and public registration can still create only citizen accounts.
+
+To create local accounts for reviewing each workspace, configure `NODE_ENV=development`, `MONGODB_URI`, `JWT_SECRET`, `FRONTEND_URL`, and `LOCAL_REVIEW_PASSWORD` in `server/.env`. Use a local MongoDB URI such as `mongodb://127.0.0.1:27017/survelliance_ai` if MongoDB Community Server is running, or your private Atlas URI. Set a unique review password of at least 12 characters, then run:
+
+```sh
+cd server
+npm run seed-local-roles
+```
+
+Sign in using the selected role tab and one of these accounts. All three use the password configured in `LOCAL_REVIEW_PASSWORD`:
+
+- Admin: `admin.review@example.com`
+- Officer: `officer.review@example.com`
+- Citizen: `citizen.review@example.com`
+
+The seeder refuses to run unless `NODE_ENV=development`; it does not overwrite existing accounts. Do not run it in production. If the MongoDB service is not installed locally, use a private development Atlas database and never reuse that database for production.
+
 ## API
 
 All endpoints are under `/api`. Mutating requests use a CSRF token obtained from `GET /api/auth/csrf` and sent as `X-CSRF-Token`. The frontend client handles this. Authentication uses an HttpOnly cookie; the browser does not store JWTs in local storage.

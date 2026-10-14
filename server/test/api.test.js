@@ -23,6 +23,7 @@ test('citizen registration hashes password and assigns citizen role; login estab
   assert.equal('passwordHash' in registration.body.user, false);
   assert.equal((await agent.get('/api/auth/me')).body.user.email, 'person@example.com');
   await agent.post('/api/auth/logout').set('x-csrf-token', csrf).send({}).expect(200);
+  await agent.post('/api/auth/login').set('x-csrf-token', csrf).send({ email: 'person@example.com', password: 'a-long-password-123', selectedRole: 'admin' }).expect(403);
   await agent.post('/api/auth/login').set('x-csrf-token', csrf).send({ email: 'person@example.com', password: 'wrong-password' }).expect(401);
 });
 

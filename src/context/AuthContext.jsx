@@ -13,9 +13,9 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     api('/auth/me').then(data => setUser(data.user)).catch(() => setUser(null)).finally(() => setLoading(false));
   }, []);
-  const loginWithEmail = async (email, password) => {
+  const loginWithEmail = async (email, password, selectedRole) => {
     setAuthError('');
-    try { const data = await api('/auth/login', { method: 'POST', body: JSON.stringify({ email, password }) }); setUser(data.user); return true; }
+    try { const data = await api('/auth/login', { method: 'POST', body: JSON.stringify({ email, password, selectedRole }) }); setUser(data.user); return true; }
     catch (error) { setAuthError(error.message); return false; }
   };
   const registerNewCitizen = async ({ name, email, password, phone }) => {
