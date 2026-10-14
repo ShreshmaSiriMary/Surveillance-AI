@@ -23,10 +23,10 @@ const menus = {
     { id: 'cases', label: 'Case management', icon: Briefcase },
     { id: 'surveillance', label: 'Camera monitoring', icon: Video, badge: 'Demo' },
     { id: 'database', label: 'Records registry', icon: Users },
-    { id: 'sketch', label: 'Image matching', icon: PenTool },
+    { id: 'sketch', label: 'Image matching', icon: PenTool, badge: 'Demo' },
     { id: 'gis', label: 'Map view', icon: MapPin },
-    { id: 'aging', label: 'Age progression', icon: Clock },
-    { id: 'biometric', label: 'Identity checks', icon: Fingerprint },
+    { id: 'aging', label: 'Age progression', icon: Clock, badge: 'Demo' },
+    { id: 'biometric', label: 'Identity checks', icon: Fingerprint, badge: 'Demo' },
     { id: 'analytics', label: 'Reports', icon: BarChart3 },
     { id: 'audit', label: 'Audit history', icon: Lock }
   ],
@@ -34,7 +34,7 @@ const menus = {
     { id: 'cases', label: 'Assigned cases', icon: Briefcase },
     { id: 'surveillance', label: 'Camera monitoring', icon: Video, badge: 'Demo' },
     { id: 'database', label: 'Records search', icon: Users },
-    { id: 'sketch', label: 'Image matching', icon: PenTool },
+    { id: 'sketch', label: 'Image matching', icon: PenTool, badge: 'Demo' },
     { id: 'gis', label: 'Map view', icon: MapPin },
     { id: 'analytics', label: 'Reports', icon: BarChart3 }
   ],
@@ -80,8 +80,8 @@ export default function Sidebar({ activeTab, setActiveTab }) {
       <div className="sidebar-status" role="note">
         <ShieldCheck size={17} aria-hidden="true" />
         <div>
-          <strong>Demonstration workspace</strong>
-          <p>Records and activity shown here are sample data.</p>
+          <strong>Connected workspace</strong>
+          <p>Case records use the configured API. Camera, map analytics, and image tools remain demonstrations.</p>
         </div>
       </div>
     </aside>

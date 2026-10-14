@@ -20,7 +20,7 @@ import { AuthProvider, useAuth } from './context/AuthContext';
 import { INITIAL_SYNTHETIC_SUSPECTS } from './data/mockData';
 
 function MainApp() {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const role = user?.role || 'citizen';
 
   // Default initial active tab according to role
@@ -55,6 +55,7 @@ function MainApp() {
   };
 
   // If user is logged out, ALWAYS display the Auth Page first!
+  if (loading) return <div className="login-shell" role="status" style={{ justifyContent: 'center', alignItems: 'center' }}>Connecting securely…</div>;
   if (!user) {
     return <LoginPage />;
   }
